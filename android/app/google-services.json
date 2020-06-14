@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "927274078506",
+    "firebase_url": "https://quick-bakes.firebaseio.com",
+    "project_id": "quick-bakes",
+    "storage_bucket": "quick-bakes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927274078506:android:b9d4b96a1f181c96aa0e53",
+        "android_client_info": {
+          "package_name": "com.digiwrecks.quickbakes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "927274078506-sl81bg4jo2c2mfhhtcnms9il3bou5frp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9jMvXXdCMKpOj-EfrcYG7IeKIJStmG8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "927274078506-sl81bg4jo2c2mfhhtcnms9il3bou5frp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
