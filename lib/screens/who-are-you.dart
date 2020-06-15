@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:quickbakes/screens/admin/admin-login.dart';
 import 'package:quickbakes/screens/register.dart';
 import 'package:quickbakes/widgets/custom-text.dart';
 import 'package:quickbakes/widgets/input-field.dart';
@@ -44,7 +45,10 @@ class WhoAreYou extends StatelessWidget {
                   return BakeryLogIn();}));
               },),
               SizedBox(height: ScreenUtil().setHeight(40),),
-              MainButton(text: 'Admin',onPressed: (){},),
+              MainButton(text: 'Admin',onPressed: (){
+                Navigator.push(context, CupertinoPageRoute(builder: (context){
+                  return AdminLogIn();}));
+              },),
 
             ],
           ),

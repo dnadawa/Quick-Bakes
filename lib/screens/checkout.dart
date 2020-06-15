@@ -132,7 +132,8 @@ class _CheckoutState extends State<Checkout> {
                             'bakeryEmail': widget.bakeryEmail,
                             'price': widget.price,
                             'userEmail': widget.userEmail,
-                            'status': 'Processing'
+                            'status': 'Processing',
+                            'withdrawn': false
                           });
                           ToastBar(text: 'Data Uploaded!',color: Colors.green).show();
                           Navigator.push(context, CupertinoPageRoute(builder: (context){

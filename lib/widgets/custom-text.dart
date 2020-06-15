@@ -6,8 +6,8 @@ class CustomText extends StatelessWidget {
   final double size;
   final Color color;
   final TextAlign align;
-
-  const CustomText({Key key, this.text, this.size, this.color=Colors.white, this.align=TextAlign.center}) : super(key: key);
+  final bool isUnderline;
+  const CustomText({Key key, this.text, this.size, this.color=Colors.white, this.align=TextAlign.center, this.isUnderline=false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,8 @@ class CustomText extends StatelessWidget {
       style: TextStyle(
           color: color,
           fontWeight: FontWeight.bold,
-          fontSize: size
+          fontSize: size,
+        decoration: isUnderline?TextDecoration.underline:TextDecoration.none
       ),
     );
   }
