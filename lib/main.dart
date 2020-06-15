@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quickbakes/screens/bakery/bakery-home.dart';
-import 'package:quickbakes/screens/bakery/bakery-send-offer.dart';
-import 'package:quickbakes/screens/home.dart';
-import 'package:quickbakes/screens/login.dart';
 import 'package:quickbakes/screens/who-are-you.dart';
 
 void main(){

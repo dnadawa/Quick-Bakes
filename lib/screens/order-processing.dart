@@ -1,28 +1,25 @@
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:quickbakes/screens/checkout.dart';
-import 'package:quickbakes/widgets/button.dart';
 import 'package:quickbakes/widgets/custom-text.dart';
 
-class CustomOffers extends StatefulWidget {
+class OrderProcessing extends StatefulWidget {
   final String id;
-  final String userEmail;
-  const CustomOffers({Key key, this.id, this.userEmail}) : super(key: key);
+  final String status;
+  const OrderProcessing({Key key, this.id, this.status}) : super(key: key);
 
   @override
-  _CustomOffersState createState() => _CustomOffersState();
+  _OrderProcessingState createState() => _OrderProcessingState();
 }
 
-class _CustomOffersState extends State<CustomOffers> {
+class _OrderProcessingState extends State<OrderProcessing> {
   var requestList;
   double lat,long;
   getData(){
-    Firestore.instance.collection('request').document(widget.id).collection('offers').snapshots().listen((datasnapshot){
+    Firestore.instance.collection('request').document(widget.id).collection('offers').where('isActive',isEqualTo: true).snapshots().listen((datasnapshot){
       setState(() {
         requestList = datasnapshot.documents;
       });
@@ -37,7 +34,7 @@ class _CustomOffersState extends State<CustomOffers> {
     });
   }
 
-   calculateDistance({double sLat,double sLong,double eLat,double eLong}) async {
+  calculateDistance({double sLat,double sLong,double eLat,double eLong}) async {
     double distance = await Geolocator().distanceBetween(sLat, sLong, eLat, eLong);
     return distance;
   }
@@ -74,7 +71,6 @@ class _CustomOffersState extends State<CustomOffers> {
             itemCount: requestList.length,
             itemBuilder: (context,i) {
               String bakeryName = requestList[i]['bakeryName'];
-              String bakeryEmail = requestList[i]['bakeryEmail'];
               String price = requestList[i]['price'];
               String description = requestList[i]['description'];
               double bLat = requestList[i]['lat'];
@@ -147,13 +143,16 @@ class _CustomOffersState extends State<CustomOffers> {
                                 align: TextAlign.justify,
                               ),
                             ),
-                            SizedBox(height: ScreenUtil().setHeight(20),),
-                            Button(
-                              text: 'Order Now',
-                              onTap: (){
-                                Navigator.push(context, CupertinoPageRoute(builder: (context){
-                                  return Checkout(orderID: widget.id,price: int.parse(price),bakeryName: bakeryName,userEmail: widget.userEmail,bakeryEmail: bakeryEmail,);}));
-                              },
+                            Container(
+                              height: ScreenUtil().setHeight(80),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(10),
+                                  ),
+                                  color: Theme.of(context).primaryColor
+                              ),
+                              child: Center(
+                                  child: CustomText(text: widget.status,size: ScreenUtil().setSp(40),color: widget.status=='Processing'?Colors.yellow:Colors.red,)),
                             ),
                           ],
                         ),

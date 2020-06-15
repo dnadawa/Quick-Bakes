@@ -2,22 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:quickbakes/screens/bakery/bakery-send-offer.dart';
 import 'package:quickbakes/widgets/button.dart';
 import 'package:quickbakes/widgets/custom-text.dart';
+import 'package:quickbakes/widgets/toast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class BakeryCustomOffers extends StatefulWidget {
+class BakeryCompletedOrders extends StatefulWidget {
   @override
-  _BakeryCustomOffersState createState() => _BakeryCustomOffersState();
+  _BakeryCompletedOrdersState createState() => _BakeryCompletedOrdersState();
 }
 
-class _BakeryCustomOffersState extends State<BakeryCustomOffers> {
+class _BakeryCompletedOrdersState extends State<BakeryCompletedOrders> {
   var requestList;
-  getData(){
-    Firestore.instance.collection('request').where('status', isEqualTo: 'Active').snapshots().listen((datasnapshot){
+  getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String bakeryEmail = prefs.getString('bakeryEmail');
+    Firestore.instance.collection('request').where('status', isEqualTo: 'Completed').where('activeBaker', isEqualTo: bakeryEmail).snapshots().listen((datasnapshot){
       setState(() {
         requestList = datasnapshot.documents;
       });
+
     });
   }
 
@@ -36,7 +40,7 @@ class _BakeryCustomOffersState extends State<BakeryCustomOffers> {
           centerTitle: true,
           automaticallyImplyLeading: false,
           elevation: 0,
-          title: CustomText(text: 'Custom Offers',),
+          title: CustomText(text: 'Completed Orders',),
         ),
         body: Container(
           width: double.infinity,
@@ -113,14 +117,6 @@ class _BakeryCustomOffersState extends State<BakeryCustomOffers> {
                           color: Theme.of(context).primaryColor,
                           align: TextAlign.justify,
                         ),
-                      ),
-                      SizedBox(height: ScreenUtil().setHeight(20),),
-                      Button(
-                        text: 'Send Offer',
-                        onTap: (){
-                          Navigator.push(context, CupertinoPageRoute(builder: (context){
-                            return BakerySendOffer(orderID: id,);}));
-                        },
                       ),
                     ],
                   ),

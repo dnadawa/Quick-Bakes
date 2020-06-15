@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:quickbakes/screens/bakery/bakery-completed-orders.dart';
 import 'package:quickbakes/screens/bakery/bakery-custom-offers.dart';
 import 'package:quickbakes/screens/bakery/bakery-orders.dart';
 import 'package:quickbakes/screens/post-a-request.dart';
@@ -16,7 +17,7 @@ class _BakeryHomeState extends State<BakeryHome> with SingleTickerProviderStateM
   void initState() {
     // TODO: implement initState
     super.initState();
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -44,6 +45,7 @@ class _BakeryHomeState extends State<BakeryHome> with SingleTickerProviderStateM
           tabs: <Widget>[
             Tab(icon: Icon(Icons.mail),text: 'Custom Offers',),
             Tab(icon: Icon(Icons.assignment),text: 'Orders',),
+            Tab(icon: Icon(Icons.verified_user),text: 'Completed Orders',),
           ],
         ),
       ),
@@ -51,7 +53,8 @@ class _BakeryHomeState extends State<BakeryHome> with SingleTickerProviderStateM
         controller: tabController,
         children: <Widget>[
           BakeryCustomOffers(),
-          BakeryOrders()
+          BakeryOrders(),
+          BakeryCompletedOrders()
         ],
       ),
     );

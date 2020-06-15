@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:quickbakes/screens/custom-offers.dart';
+import 'package:quickbakes/screens/order-processing.dart';
 import 'package:quickbakes/widgets/button.dart';
 import 'package:quickbakes/widgets/custom-text.dart';
 
@@ -46,12 +47,20 @@ class _CustomOffersPreState extends State<CustomOffersPre> {
           child: requestList!=null?ListView.builder(
             itemCount: requestList.length,
             itemBuilder: (context,i){
-              final String orderID = requestList[i]['id'];
-              final String status = requestList[i]['status'];
+               String orderID = requestList[i]['id'];
+               String status = requestList[i]['status'];
+               String email = requestList[i]['email'];
               return GestureDetector(
                 onTap: (){
-                  Navigator.push(context, CupertinoPageRoute(builder: (context){
-                    return CustomOffers(id: orderID,);}));
+                  if(status=='Active'){
+                    Navigator.push(context, CupertinoPageRoute(builder: (context){
+                      return CustomOffers(id: orderID,userEmail: email,);}));
+                  }
+                  else{
+                    Navigator.push(context, CupertinoPageRoute(builder: (context){
+                      return OrderProcessing(id: orderID,status: status,);}));
+                  }
+
                 },
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(25),ScreenUtil().setWidth(40),ScreenUtil().setWidth(25),0),
