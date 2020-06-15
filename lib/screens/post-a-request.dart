@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:quickbakes/screens/who-are-you.dart';
 import 'package:quickbakes/widgets/custom-text.dart';
 import 'package:quickbakes/widgets/toast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -65,6 +66,14 @@ class _PostARequestState extends State<PostARequest> {
         automaticallyImplyLeading: false,
         elevation: 0,
         title: CustomText(text: 'Post a Request',),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.exit_to_app),onPressed: () async {
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setString('email', null);
+            Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context){
+              return WhoAreYou();}));
+          },),
+        ],
       ),
       body: Container(
           width: double.infinity,
@@ -146,10 +155,10 @@ class _PostARequestState extends State<PostARequest> {
                             width: ScreenUtil().setWidth(350),
                             decoration: BoxDecoration(
                                 color: Theme.of(context).accentColor,
-                                borderRadius: BorderRadius.circular(20)
+                                borderRadius: BorderRadius.circular(12)
                             ),
                             child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(20)),
+                              padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(15)),
                               child: Row(
                                 children: <Widget>[
                                   CustomText(text: 'Budget',size: ScreenUtil().setSp(30),),
@@ -159,7 +168,7 @@ class _PostARequestState extends State<PostARequest> {
                                       height: ScreenUtil().setHeight(80),
                                       decoration: BoxDecoration(
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.horizontal(right: Radius.circular(20))
+                                          borderRadius: BorderRadius.horizontal(right: Radius.circular(10))
                                       ),
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(20)),

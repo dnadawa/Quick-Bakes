@@ -5,6 +5,9 @@ import 'package:flutter_screenutil/screenutil.dart';
 import 'package:quickbakes/screens/bakery/bakery-send-offer.dart';
 import 'package:quickbakes/widgets/button.dart';
 import 'package:quickbakes/widgets/custom-text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../who-are-you.dart';
 
 class BakeryCustomOffers extends StatefulWidget {
   @override
@@ -37,6 +40,14 @@ class _BakeryCustomOffersState extends State<BakeryCustomOffers> {
           automaticallyImplyLeading: false,
           elevation: 0,
           title: CustomText(text: 'Custom Offers',),
+          actions: <Widget>[
+            IconButton(icon: Icon(Icons.exit_to_app),onPressed: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setString('bakeryEmail', null);
+              Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context){
+                return WhoAreYou();}));
+            },),
+          ],
         ),
         body: Container(
           width: double.infinity,

@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:quickbakes/screens/custom-offers.dart';
 import 'package:quickbakes/screens/order-processing.dart';
+import 'package:quickbakes/screens/who-are-you.dart';
 import 'package:quickbakes/widgets/button.dart';
 import 'package:quickbakes/widgets/custom-text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomOffersPre extends StatefulWidget {
   @override
@@ -37,6 +39,14 @@ class _CustomOffersPreState extends State<CustomOffersPre> {
           automaticallyImplyLeading: false,
           elevation: 0,
           title: CustomText(text: 'Custom Offers',),
+          actions: <Widget>[
+            IconButton(icon: Icon(Icons.exit_to_app),onPressed: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setString('email', null);
+              Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context){
+                return WhoAreYou();}));
+            },),
+          ],
         ),
         body: Container(
           width: double.infinity,
