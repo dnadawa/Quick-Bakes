@@ -15,7 +15,9 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(milliseconds: 1000), () {
+    Timer(Duration(milliseconds: 5000), () {
+      Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context){
+        return MyApp();}));
       setState(() {
         _opacity = 1;
       });
@@ -32,23 +34,10 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
         color: Theme.of(context).primaryColor,
         //color: Colors.white,
         child: Center(
-          child: AnimatedOpacity(
-            opacity: _opacity,
-            duration: Duration(milliseconds: 500),
-            curve: Curves.easeInOutCirc,
-            onEnd: () {
-              Timer(Duration(milliseconds: 500), () {
-                Navigator.pushReplacement(
-                  context,
-                  CupertinoPageRoute(builder: (context) => MyApp()),
-                );
-              });
-            },
-            child: SizedBox(
-                width: ScreenUtil().setWidth(400),
-                height: ScreenUtil().setHeight(400),
-                child: Image.asset('images/splash.png')),
-          ),
+          child: SizedBox(
+              width: ScreenUtil().setWidth(600),
+              height: ScreenUtil().setHeight(600),
+              child: Image.asset('images/splash.gif')),
         ),
       ),
     );

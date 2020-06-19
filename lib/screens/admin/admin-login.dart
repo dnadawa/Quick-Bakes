@@ -49,43 +49,10 @@ class AdminLogIn extends StatelessWidget {
 
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: GestureDetector(
-                      onTap: (){
-                        Navigator.push(context, CupertinoPageRoute(builder: (context){
-                          return BakerySignUp();}));
-                      },
-                      child: Container(
-                        height: ScreenUtil().setHeight(150),
-                        width: ScreenUtil().setWidth(250),
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            borderRadius: BorderRadius.only(bottomRight: Radius.circular(10))
-                        ),
-                        child: Center(
-                            child: CustomText(text: 'SIGN UP',size: ScreenUtil().setSp(40),)),
-                      ),
-                    ),
-                  ),
-//                    Align(
-//                      alignment: Alignment.topRight,
-//                      child: Container(
-//                          width: ScreenUtil().setWidth(350),
-//                          height: ScreenUtil().setHeight(350),
-//                          child: Image.asset('images/logo.png')),
-//                    ),
-                ],
-              ),
-
-
               Padding(
-                padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setWidth(200), ScreenUtil().setWidth(35), ScreenUtil().setWidth(35)),
+                padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setWidth(0), ScreenUtil().setWidth(35), ScreenUtil().setWidth(35)),
                 child: CustomText(text: 'Log In',size: ScreenUtil().setSp(70)),
               ),
 

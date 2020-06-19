@@ -10,7 +10,7 @@ void main(){
       MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primaryColor: Color(0xff424242),
+            primaryColor: Color(0xff424043),
             fontFamily: 'GoogleSans'
         ),
         home: Splash(),
