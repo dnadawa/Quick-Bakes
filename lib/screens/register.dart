@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
 import 'package:quickbakes/widgets/custom-text.dart';
 import 'package:quickbakes/widgets/input-field.dart';
 import 'package:quickbakes/widgets/toast.dart';
@@ -33,7 +35,7 @@ class SignUp extends StatelessWidget {
           'address': address.text,
           'phone': phone.text,
         });
-
+        sendMail(email.text);
         name.clear();
         address.clear();
         email.clear();
@@ -47,6 +49,26 @@ class SignUp extends StatelessWidget {
       }
     }else{
       ToastBar(color: Colors.red,text: 'Please Fill all the Fields!').show();
+    }
+  }
+
+  sendMail(String email) async {
+    String username = 'quickbakes0@gmail.com';
+    String password = 'Admin@quick';
+    final smtpServer = gmail(username, password);
+    final message = Message()
+      ..from = Address(username, 'QuickBakes')
+      ..recipients.add(email)
+      ..subject = 'Your Account is Registered!'
+      ..text = 'You have successfully registered with QuickBakes community! Thanks for joining with us! We are working to give you the best experience from out platform!';
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
     }
   }
 

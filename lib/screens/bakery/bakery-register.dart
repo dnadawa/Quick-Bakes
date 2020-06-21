@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
 import 'package:quickbakes/widgets/custom-text.dart';
 import 'package:quickbakes/widgets/input-field.dart';
 import 'package:quickbakes/widgets/toast.dart';
@@ -43,7 +45,7 @@ class _BakerySignUpState extends State<BakerySignUp> {
           'lat': lat,
           'long': long
         });
-
+        sendMail(email.text);
         name.clear();
         address.clear();
         email.clear();
@@ -60,6 +62,25 @@ class _BakerySignUpState extends State<BakerySignUp> {
     }
   }
 
+  sendMail(String email) async {
+    String username = 'quickbakes0@gmail.com';
+    String password = 'Admin@quick';
+    final smtpServer = gmail(username, password);
+    final message = Message()
+      ..from = Address(username, 'QuickBakes')
+      ..recipients.add(email)
+      ..subject = 'Your Account is Registered!'
+      ..text = 'You have successfully registered with QuickBakes community! Thanks for joining with us!';
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
+  }
 
   @override
   void initState() {
