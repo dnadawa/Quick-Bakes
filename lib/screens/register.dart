@@ -60,7 +60,7 @@ class SignUp extends StatelessWidget {
       ..from = Address(username, 'QuickBakes')
       ..recipients.add(email)
       ..subject = 'Your Account is Registered!'
-      ..text = 'You have successfully registered with QuickBakes community! Thanks for joining with us! We are working to give you the best experience from out platform!';
+      ..text = 'You have successfully registered with quickbakes community, thank you for joining us! We are working to give you the best experience from our platform. Thank you!\nQuickBakes Team';
     try {
       final sendReport = await send(message, smtpServer);
       print('Message sent: ' + sendReport.toString());
@@ -77,39 +77,39 @@ class SignUp extends StatelessWidget {
     ScreenUtil.init(context, width: 720, height: 1520,allowFontScaling: false);
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
-          body: Container(
+        body: Container(
             width: double.infinity,
-            height: double.infinity,
+
             decoration: BoxDecoration(
               image: DecorationImage(image: AssetImage('images/back.png'),fit: BoxFit.fill),
             ),
             
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: GestureDetector(
-                        onTap: (){
-                            Navigator.pop(context);
-                        },
-                        child: Container(
-                          height: ScreenUtil().setHeight(150),
-                          width: ScreenUtil().setWidth(250),
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
-                              borderRadius: BorderRadius.only(bottomRight: Radius.circular(10))
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: GestureDetector(
+                          onTap: (){
+                              Navigator.pop(context);
+                          },
+                          child: Container(
+                            height: ScreenUtil().setHeight(150),
+                            width: ScreenUtil().setWidth(250),
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColor,
+                                borderRadius: BorderRadius.only(bottomRight: Radius.circular(10))
+                            ),
+                            child: Center(
+                                child: CustomText(text: 'SIGN IN',size: ScreenUtil().setSp(40),)),
                           ),
-                          child: Center(
-                              child: CustomText(text: 'SIGN IN',size: ScreenUtil().setSp(40),)),
                         ),
                       ),
-                    ),
 //                    Align(
 //                      alignment: Alignment.topRight,
 //                      child: Container(
@@ -117,74 +117,71 @@ class SignUp extends StatelessWidget {
 //                          height: ScreenUtil().setHeight(350),
 //                          child: Image.asset('images/logo.png')),
 //                    ),
-                  ],
-                ),
+                    ],
+                  ),
 
 
-                Padding(
-                  padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setWidth(200), ScreenUtil().setWidth(35), ScreenUtil().setWidth(35)),
-                  child: CustomText(text: 'Sign Up',size: ScreenUtil().setSp(70)),
-                ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setWidth(200), ScreenUtil().setWidth(35), ScreenUtil().setWidth(35)),
+                    child: CustomText(text: 'Sign Up',size: ScreenUtil().setSp(70)),
+                  ),
 
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding:  EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), 0),
-                          child: InputField(hint: 'Full Name',controller: name,),
-                        ),
+                  Column(
+                    children: <Widget>[
+                      Padding(
+                        padding:  EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), 0),
+                        child: InputField(hint: 'Full Name',controller: name,),
+                      ),
 
-                        Padding(
-                          padding:  EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), 0),
-                          child: InputField(hint: 'Address',controller: address),
-                        ),
+                      Padding(
+                        padding:  EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), 0),
+                        child: InputField(hint: 'Address',controller: address),
+                      ),
 
-                        Padding(
-                          padding:  EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), 0),
-                          child: InputField(hint: 'Phone Number',controller: phone,type: TextInputType.phone,),
-                        ),
+                      Padding(
+                        padding:  EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), 0),
+                        child: InputField(hint: 'Phone Number',controller: phone,type: TextInputType.phone,),
+                      ),
 
-                        Padding(
-                          padding:  EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), 0),
-                          child: InputField(hint: 'Email',type: TextInputType.emailAddress,controller: email,),
-                        ),
+                      Padding(
+                        padding:  EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), 0),
+                        child: InputField(hint: 'Email',type: TextInputType.emailAddress,controller: email,),
+                      ),
 
-                        Padding(
-                          padding:  EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), 0),
-                          child: InputField(hint: 'Password',isPassword: true,controller: password,),
-                        ),
+                      Padding(
+                        padding:  EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), ScreenUtil().setWidth(35), 0),
+                        child: InputField(hint: 'Password',isPassword: true,controller: password,),
+                      ),
 
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(70)),
-                          child: GestureDetector(
-                            onTap: ()=>signUp(),
-                            child: Container(
-                              height: ScreenUtil().setHeight(120),
-                              width: ScreenUtil().setWidth(320),
-                              decoration: BoxDecoration(
-                                  color: Theme.of(context).primaryColor,
-                                  borderRadius: BorderRadius.circular(10)
-                              ),
-                              child: Center(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      CustomText(text: "Submit",size: ScreenUtil().setSp(40),),
-                                      SizedBox(width: ScreenUtil().setWidth(20),),
-                                      Icon(Icons.assignment_turned_in,color: Colors.white,size: 27,),
-                                    ],
-                                  )
-                              ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(70)),
+                        child: GestureDetector(
+                          onTap: ()=>signUp(),
+                          child: Container(
+                            height: ScreenUtil().setHeight(120),
+                            width: ScreenUtil().setWidth(320),
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColor,
+                                borderRadius: BorderRadius.circular(10)
+                            ),
+                            child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    CustomText(text: "Submit",size: ScreenUtil().setSp(40),),
+                                    SizedBox(width: ScreenUtil().setWidth(20),),
+                                    Icon(Icons.assignment_turned_in,color: Colors.white,size: 27,),
+                                  ],
+                                )
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
       ),
