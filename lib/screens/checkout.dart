@@ -46,8 +46,8 @@ class _CheckoutState extends State<Checkout> {
     super.initState();
     StripePayment.setOptions(
       StripeOptions(
-        publishableKey: "pk_test_ceYbOP9J1CQYcPFFUYzzgZO300PCZvWMI6",
-        androidPayMode: 'test',
+        publishableKey: "pk_live_LfxuYv1bfMeGVABtGZjmZCqO00EW7ikXGf",
+        androidPayMode: 'live',
       ),
     );
   }
@@ -112,7 +112,7 @@ class _CheckoutState extends State<Checkout> {
                       try{
                         var response = await http.post('https://api.stripe.com/v1/charges',
                           body: {'amount': '${(widget.price*100).toString()}','currency': 'usd',"source": token.tokenId},
-                          headers: {'Authorization': "Bearer sk_test_NxydE0BKuePH2kP6BV0MCc2200J0phDPbk"},
+                          headers: {'Authorization': "Bearer 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"},
                         );
                         print('Response status: ${response.statusCode}');
                         print('Response body: ${response.body}');
