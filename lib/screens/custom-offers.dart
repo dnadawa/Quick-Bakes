@@ -70,7 +70,8 @@ class _CustomOffersState extends State<CustomOffers> {
           decoration: BoxDecoration(
               image: DecorationImage(image: AssetImage('images/back.png'),fit: BoxFit.fill)
           ),
-          child: requestList!=null?ListView.builder(
+          child: requestList!=null?
+          requestList.isNotEmpty?ListView.builder(
             itemCount: requestList.length,
             itemBuilder: (context,i) {
               String bakeryName = requestList[i]['bakeryName'];
@@ -166,8 +167,8 @@ class _CustomOffersState extends State<CustomOffers> {
               );
             },
           ):Center(
-            child: CircularProgressIndicator(),
-          ),
+            child: CustomText(text: 'No Requests found!',size: ScreenUtil().setSp(50),),
+          ):Center(child: CircularProgressIndicator(),),
         )
     );
   }
