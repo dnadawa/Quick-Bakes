@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>927274078506-efffie0mgsmkmtc0n4lt0g1o7i0cpcge.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.927274078506-efffie0mgsmkmtc0n4lt0g1o7i0cpcge</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDVYYR6ECD97pNJwNUKc6wZ4sq6k3pVAg0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>927274078506</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.digiwrecks.quickbakes</string>
+	<key>PROJECT_ID</key>
+	<string>quick-bakes</string>
+	<key>STORAGE_BUCKET</key>
+	<string>quick-bakes.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:927274078506:ios:2e5255480b9607d4aa0e53</string>
+	<key>DATABASE_URL</key>
+	<string>https://quick-bakes.firebaseio.com</string>
+</dict>
+</plist>

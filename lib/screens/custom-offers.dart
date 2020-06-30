@@ -20,9 +20,12 @@ class CustomOffers extends StatefulWidget {
 
 class _CustomOffersState extends State<CustomOffers> {
   var requestList;
-  double lat,long;
+  //double lat,long;
+  double lat  = 0;
+  double long = 0;
+  var subscripton;
   getData(){
-    Firestore.instance.collection('request').document(widget.id).collection('offers').snapshots().listen((datasnapshot){
+    subscripton = Firestore.instance.collection('request').document(widget.id).collection('offers').snapshots().listen((datasnapshot){
       setState(() {
         requestList = datasnapshot.documents;
       });
@@ -51,9 +54,18 @@ class _CustomOffersState extends State<CustomOffers> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getData();
     getLocation();
+    getData();
+    //getLocation();
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    subscripton?.cancel();
+  }
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: false);
