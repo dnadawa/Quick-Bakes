@@ -2,16 +2,39 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
 import 'package:quickbakes/widgets/custom-text.dart';
 import 'package:quickbakes/widgets/toast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BakerySendOffer extends StatelessWidget {
   final String orderID;
-  BakerySendOffer({Key key, this.orderID}) : super(key: key);
+  final String userEmail;
+  BakerySendOffer({Key key, this.orderID, this.userEmail}) : super(key: key);
   
   TextEditingController description = TextEditingController();
   TextEditingController budget = TextEditingController();
+
+  sendMail(String email) async {
+    String username = 'quickbakes0@gmail.com';
+    String password = 'Admin@quick';
+    final smtpServer = gmail(username, password);
+    final message = Message()
+      ..from = Address(username, 'QuickBakes')
+      ..recipients.add(email)
+      ..subject = 'You have received an offer!'
+      ..text = 'You have received an offer from a bakery!';
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -139,6 +162,7 @@ class BakerySendOffer extends StatelessWidget {
                           'long': long,
                         });
                         ToastBar(text: 'Offer Sent!',color: Colors.green).show();
+                        sendMail(userEmail);
                         description.clear();
                         budget.clear();
                       }

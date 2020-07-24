@@ -52,7 +52,6 @@ class _CustomOffersState extends State<CustomOffers> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getLocation();
     getData();
@@ -61,7 +60,6 @@ class _CustomOffersState extends State<CustomOffers> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     subscripton?.cancel();
   }

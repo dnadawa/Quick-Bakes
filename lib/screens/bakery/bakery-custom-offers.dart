@@ -63,6 +63,7 @@ class _BakeryCustomOffersState extends State<BakeryCustomOffers> {
               String id = requestList[i]['id'];
               String description = requestList[i]['description'];
               String date = requestList[i]['delivery'];
+              String userEmail = requestList[i]['email'];
               return Padding(
                 padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(25),ScreenUtil().setWidth(40),ScreenUtil().setWidth(25),0),
                 child: Container(
@@ -130,7 +131,7 @@ class _BakeryCustomOffersState extends State<BakeryCustomOffers> {
                         text: 'Send Offer',
                         onTap: (){
                           Navigator.push(context, CupertinoPageRoute(builder: (context){
-                            return BakerySendOffer(orderID: id,);}));
+                            return BakerySendOffer(orderID: id,userEmail:userEmail,);}));
                         },
                       ),
                     ],

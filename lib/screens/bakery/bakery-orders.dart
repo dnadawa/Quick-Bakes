@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
 import 'package:quickbakes/widgets/button.dart';
 import 'package:quickbakes/widgets/custom-text.dart';
 import 'package:quickbakes/widgets/toast.dart';
@@ -14,15 +16,37 @@ class BakeryOrders extends StatefulWidget {
 
 class _BakeryOrdersState extends State<BakeryOrders> {
   var requestList;
+  String bakeryName;
   getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String bakeryEmail = prefs.getString('bakeryEmail');
+    bakeryName = prefs.getString('bakeryName');
     Firestore.instance.collection('request').where('status', isEqualTo: 'Processing').where('activeBaker', isEqualTo: bakeryEmail).snapshots().listen((datasnapshot){
       setState(() {
         requestList = datasnapshot.documents;
       });
 
     });
+  }
+
+  sendMail(String email, String id) async {
+    String username = 'quickbakes0@gmail.com';
+    String password = 'Admin@quick';
+    final smtpServer = gmail(username, password);
+    final message = Message()
+      ..from = Address(username, 'QuickBakes')
+      ..recipients.add(email)
+      ..subject = 'Your order is Completed!'
+      ..text = 'You order $id is Marked as completed by the $bakeryName.';
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
   }
 
   @override
@@ -56,6 +80,7 @@ class _BakeryOrdersState extends State<BakeryOrders> {
               String id = requestList[i]['id'];
               String description = requestList[i]['description'];
               String date = requestList[i]['delivery'];
+              String email = requestList[i]['email'];
               return Padding(
                 padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(25),ScreenUtil().setWidth(40),ScreenUtil().setWidth(25),0),
                 child: Container(
@@ -128,6 +153,7 @@ class _BakeryOrdersState extends State<BakeryOrders> {
                           Firestore.instance.collection('orders').document(id).updateData({
                             'status': 'Completed'
                           });
+                          sendMail(email, id);
                           ToastBar(text: 'Order Marked as Completed!',color: Colors.green).show();
                         },
                       ),

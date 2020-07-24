@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
 import 'package:quickbakes/screens/admin/admin-home.dart';
 import 'package:quickbakes/widgets/button.dart';
 import 'package:quickbakes/widgets/custom-text.dart';
@@ -34,6 +36,26 @@ class _AdminOrderInfoState extends State<AdminOrderInfo> {
       lat = user[0]['lat'];
       long = user[0]['long'];
     });
+  }
+
+  sendMail(String email) async {
+    String username = 'quickbakes0@gmail.com';
+    String password = 'Admin@quick';
+    final smtpServer = gmail(username, password);
+    final message = Message()
+      ..from = Address(username, 'QuickBakes')
+      ..recipients.add(email)
+      ..subject = 'You money is on the way!'
+      ..text = 'You money for order no ${widget.id} is on its way!';
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
   }
 
   @override
@@ -141,6 +163,7 @@ class _AdminOrderInfoState extends State<AdminOrderInfo> {
                             Firestore.instance.collection('orders').document(widget.id).updateData({
                               'withdrawn': true
                             });
+                            sendMail(widget.bakeryEmail);
                             Navigator.push(context, CupertinoPageRoute(builder: (context){
                               return AdminHome();}));
                         },

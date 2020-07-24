@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_credit_card/credit_card_form.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
 import 'package:quickbakes/screens/home.dart';
 import 'package:quickbakes/widgets/button.dart';
 import 'package:quickbakes/widgets/custom-text.dart';
@@ -38,6 +40,26 @@ class _CheckoutState extends State<Checkout> {
       cvvCode = creditCardModel.cvvCode;
       isCvvFocused = creditCardModel.isCvvFocused;
     });
+  }
+
+  sendMail(String email) async {
+    String username = 'quickbakes0@gmail.com';
+    String password = 'Admin@quick';
+    final smtpServer = gmail(username, password);
+    final message = Message()
+      ..from = Address(username, 'QuickBakes')
+      ..recipients.add(email)
+      ..subject = 'You have received an order!'
+      ..text = 'You have received an new order from a client! Check it now!';
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
   }
 
   @override
@@ -135,6 +157,7 @@ class _CheckoutState extends State<Checkout> {
                             'status': 'Processing',
                             'withdrawn': false
                           });
+                          sendMail(widget.bakeryEmail);
                           ToastBar(text: 'Data Uploaded!',color: Colors.green).show();
                           Navigator.push(context, CupertinoPageRoute(builder: (context){
                             return Home();}));
