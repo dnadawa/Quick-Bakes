@@ -17,7 +17,8 @@ class OrderProcessing extends StatefulWidget {
 
 class _OrderProcessingState extends State<OrderProcessing> {
   var requestList;
-  double lat,long;
+  double lat=0;
+  double long=0;
   getData(){
     Firestore.instance.collection('request').document(widget.id).collection('offers').where('isActive',isEqualTo: true).snapshots().listen((datasnapshot){
       setState(() {
@@ -48,8 +49,9 @@ class _OrderProcessingState extends State<OrderProcessing> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getData();
     getLocation();
+    getData();
+
   }
   @override
   Widget build(BuildContext context) {
