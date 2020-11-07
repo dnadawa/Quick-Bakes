@@ -30,6 +30,49 @@
             {
               "client_id": "927274078506-sl81bg4jo2c2mfhhtcnms9il3bou5frp.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "927274078506-t07kefg0s6t03aa0o49o1qf0evo2tqbs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.digiwrecks.quickbakes2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927274078506:android:e6707b1ccfe31d69aa0e53",
+        "android_client_info": {
+          "package_name": "com.digiwrecks.quickbakes2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "927274078506-sl81bg4jo2c2mfhhtcnms9il3bou5frp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9jMvXXdCMKpOj-EfrcYG7IeKIJStmG8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "927274078506-sl81bg4jo2c2mfhhtcnms9il3bou5frp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "927274078506-t07kefg0s6t03aa0o49o1qf0evo2tqbs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.digiwrecks.quickbakes2"
+              }
             }
           ]
         }
